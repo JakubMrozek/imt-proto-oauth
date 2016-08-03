@@ -1,0 +1,6 @@
+--timeout 2000
+--require imt-proto
+--require should
+--require .
+--reporter spec
+--recursive

@@ -1,0 +1,40 @@
+{
+  "author": {
+    "name": "Patrik Simek",
+    "url": "https://www.integromat.com"
+  },
+  "contributors": [
+    {
+      "name": "Petr Malimánek",
+      "url": "https://www.integromat.com"
+    }
+  ]
+  "name": "imt-proto-oauth",
+  "description": "Integromat OAuth Proto-Classes",
+  "keywords": [
+    "integromat",
+    "imt"
+  ],
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/integromat/imt-proto-oauth"
+  },
+  "dependencies": {
+    "debug": "^2.2.0",
+    "request": "^2.72.0"
+  },
+  "devDependencies": {
+    "imt-proto": "^1.1.0",
+    "mocha": "^2.0.0",
+    "nock": "^8.0.0",
+    "should": "^10.0.0"
+  },
+  "engines": {
+    "node": ">=4.0"
+  },
+  "scripts": {
+    "test": "mocha test"
+  }
+}
