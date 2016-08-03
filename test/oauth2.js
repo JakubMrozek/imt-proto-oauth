@@ -82,7 +82,7 @@ describe('IMTOAuth2Account', () => {
 			account.authorize([], (err, url) => {
 				if (err) return done(err);
 				
-				assert.strictEqual(url, 'https://www.facebook.com/dialog/oauth?redirect_uri=https%3A%2F%2Fwww.integromat.com%2Foauth%2Fcb%2Ffacebook%2F&state=STATE&client_id=APP_KEY&response_type=code&display=popup');
+				assert.strictEqual(url, 'https://www.facebook.com/dialog/oauth?redirect_uri=https%3A%2F%2Fwww.integromat.com%2Foauth%2Fcb%2Ffacebook&state=STATE&client_id=APP_KEY&response_type=code&display=popup');
 
 				assert.ok(account instanceof IMTOAuth2Account);
 				assert.ok(account instanceof IMTOAuthAccount);
@@ -103,7 +103,7 @@ describe('IMTOAuth2Account', () => {
 
 	it('should process callback', (done) => {
 		nock('https://graph.facebook.com:443')
-		.post('/oauth/access_token', "code=CODE&redirect_uri=https%3A%2F%2Fwww.integromat.com%2Foauth%2Fcb%2Ffacebook%2F&grant_type=authorization_code&client_id=APP_KEY&client_secret=APP_SECRET")
+		.post('/oauth/access_token', "code=CODE&redirect_uri=https%3A%2F%2Fwww.integromat.com%2Foauth%2Fcb%2Ffacebook&grant_type=authorization_code&client_id=APP_KEY&client_secret=APP_SECRET")
 		.reply(200, "access_token=ACCESS_TOKEN&expires=5179716");
 	
 		nock('https://graph.facebook.com:443')
@@ -189,7 +189,7 @@ describe('IMTOAuth2Account', () => {
 			account.extendScope(['user_photos', 'user_videos'], (err, url) => {
 				if (err) return done(err);
 
-				assert.strictEqual(url, 'https://www.facebook.com/dialog/oauth?redirect_uri=https%3A%2F%2Fwww.integromat.com%2Foauth%2Fcb%2Ffacebook%2F&state=STATE&client_id=APP_KEY&response_type=code&scope=public_profile%2Cuser_photos%2Cuser_videos&display=popup');
+				assert.strictEqual(url, 'https://www.facebook.com/dialog/oauth?redirect_uri=https%3A%2F%2Fwww.integromat.com%2Foauth%2Fcb%2Ffacebook&state=STATE&client_id=APP_KEY&response_type=code&scope=public_profile%2Cuser_photos%2Cuser_videos&display=popup');
 
 				account.finalize(done)
 			})
@@ -198,7 +198,7 @@ describe('IMTOAuth2Account', () => {
 
 	it('should process extension callback', (done) => {
 		nock('https://graph.facebook.com:443')
-		.post('/oauth/access_token', "code=CODE&redirect_uri=https%3A%2F%2Fwww.integromat.com%2Foauth%2Fcb%2Ffacebook%2F&grant_type=authorization_code&client_id=APP_KEY&client_secret=APP_SECRET")
+		.post('/oauth/access_token', "code=CODE&redirect_uri=https%3A%2F%2Fwww.integromat.com%2Foauth%2Fcb%2Ffacebook&grant_type=authorization_code&client_id=APP_KEY&client_secret=APP_SECRET")
 		.reply(200, "access_token=ACCESS_TOKEN&expires=5177478");
 	
 		nock('https://graph.facebook.com:443')
