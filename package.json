@@ -22,6 +22,7 @@
     "url": "https://github.com/integromat/imt-proto-oauth"
   },
   "dependencies": {
+    "qs": "^6.2.0",
     "debug": "^2.2.0",
     "request": "^2.72.0"
   },
