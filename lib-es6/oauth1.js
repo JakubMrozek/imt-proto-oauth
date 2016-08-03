@@ -18,20 +18,6 @@ global.IMTOAuth1Account = class IMTOAuth1Account extends IMTOAuthAccount {
 	 *
 	 */
 	
-	accountFromCallbackRequest(request, done) {
-		IMTOAuthAccount.getToken(this.getTokenFromRequest(request), (err, token) => {
-			if (err) return done(err);
-			
-			this.id = token.account;
-			
-			done(null);
-		});
-	}
-
-	/**
-	 *
-	 */
-	
 	initialize(done) {
 		this.options.clientId = this.data.consumerKey || this.common.consumerKey;
 		this.options.clientSecret = this.data.consumerSecret || this.common.consumerSecret;
@@ -71,7 +57,6 @@ global.IMTOAuth1Account = class IMTOAuth1Account extends IMTOAuthAccount {
 	 */
 	
 	callback(request, done) {
-		IMTOAuthAccount.deleteToken(this.getTokenFromRequest(request));
 		if (this.isAccessDenied(request)) return done(new Error('Access Denied.'));
 
 		this.client.getOAuthAccessToken(this.data.requestToken, this.data.requestTokenSecret, request.query.oauth_verifier, (err, accessToken, accessTokenSecret, data) => {

@@ -119,21 +119,25 @@ describe('IMTOAuth2Account', () => {
 		}
 
 		let account = new TestAccount();
-		account.name = 'facebook';
-		account.data = DATA;
-		account.scope = SCOPE;
-		account.common = COMMON;
-		account.environment = ENVIRONMENT;
-		account.initialize((err) => {
-			if (err) return done(err);
+		account.accountFromCallbackRequest(request, (err) => {
+			assert.strictEqual(account.id, 1);
 			
-			account.callback(request, (err) => {
+			account.name = 'facebook';
+			account.data = DATA;
+			account.scope = SCOPE;
+			account.common = COMMON;
+			account.environment = ENVIRONMENT;
+			account.initialize((err) => {
 				if (err) return done(err);
-
-				assert.deepStrictEqual(SCOPE, ['public_profile']);
-				assert.strictEqual(DATA.accessToken, 'ACCESS_TOKEN');
-
-				account.finalize(done)
+				
+				account.callback(request, (err) => {
+					if (err) return done(err);
+	
+					assert.deepStrictEqual(SCOPE, ['public_profile']);
+					assert.strictEqual(DATA.accessToken, 'ACCESS_TOKEN');
+	
+					account.finalize(done)
+				})
 			})
 		})
 	})
@@ -172,9 +176,8 @@ describe('IMTOAuth2Account', () => {
 	
 	it('should create extension url', (done) => {
 		DATA = {accessToken: 'ACCESS_TOKEN'};
-		
+
 		let account = new TestAccount();
-		account.generateState = (done) => done(null, 'STATE'); // Just for testing purposes.
 		account.id = 1;
 		account.name = 'facebook';
 		account.data = DATA;
@@ -214,21 +217,25 @@ describe('IMTOAuth2Account', () => {
 		}
 
 		let account = new TestAccount();
-		account.name = 'facebook';
-		account.data = DATA;
-		account.scope = SCOPE;
-		account.common = COMMON;
-		account.environment = ENVIRONMENT;
-		account.initialize((err) => {
-			if (err) return done(err);
+		account.accountFromCallbackRequest(request, (err) => {
+			assert.strictEqual(account.id, 1);
 			
-			account.callback(request, (err) => {
+			account.name = 'facebook';
+			account.data = DATA;
+			account.scope = SCOPE;
+			account.common = COMMON;
+			account.environment = ENVIRONMENT;
+			account.initialize((err) => {
 				if (err) return done(err);
-
-				assert.deepStrictEqual(SCOPE, ['public_profile', 'user_photos', 'user_videos']);
-				assert.strictEqual(DATA.accessToken, 'ACCESS_TOKEN');
 				
-				account.finalize(done)
+				account.callback(request, (err) => {
+					if (err) return done(err);
+	
+					assert.deepStrictEqual(SCOPE, ['public_profile', 'user_photos', 'user_videos']);
+					assert.strictEqual(DATA.accessToken, 'ACCESS_TOKEN');
+					
+					account.finalize(done)
+				})
 			})
 		})
 	})

@@ -60,33 +60,26 @@ global.IMTOAuth2Account = class IMTOAuth2Account extends IMTOAuthAccount {
 	 */
 
 	callback(request, done) {
-		IMTOAuthAccount.getToken(this.getTokenFromRequest(request), (err, token) => {
-			if (err) return done(err);
+		if (this.isAccessDenied(request)) return done(new Error('Access Denied.'));
 
-			this.acceptedScope = (token || {}).scope || [];
-			IMTOAuthAccount.deleteToken(this.getTokenFromRequest(request));
+		let params = {
+			code: request.query.code,
+			redirect_uri: this.options.redirectUri,
+			grant_type: 'authorization_code'
+		};
 
-			if (this.isAccessDenied(request)) return done(new Error('Access Denied.'));
+		params.code = request.query.code;
+		this.client.getAccessToken(params, (err, response, body) => {
+			let error = this.getResponseError(err, response);
+			if (error) return done(error);
 
-			let params = {
-				code: request.query.code,
-				redirect_uri: this.options.redirectUri,
-				grant_type: 'authorization_code'
-			};
+			if ('string' === typeof body) {
+				body = require('querystring').parse(body);
+			}
 
-			params.code = request.query.code;
-			this.client.getAccessToken(params, (err, response, body) => {
-				let error = this.getResponseError(err, response);
-				if (error) return done(error);
-
-				if ('string' === typeof body) {
-					body = require('querystring').parse(body);
-				}
-
-				this.saveTokens(body);
-				this.saveExpire(body);
-				this.saveScope(body, done);
-			})
+			this.saveTokens(body);
+			this.saveExpire(body);
+			this.saveScope(body, done);
 		})
 	}
 
