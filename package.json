@@ -15,15 +15,16 @@
     "integromat",
     "imt"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/integromat/imt-proto-oauth"
   },
   "dependencies": {
-    "qs": "^6.2.0",
     "debug": "^2.2.0",
+    "oauth": "^0.9.14",
+    "qs": "^6.2.0",
     "request": "^2.72.0"
   },
   "devDependencies": {
