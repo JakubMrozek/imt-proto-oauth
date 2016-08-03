@@ -21,7 +21,7 @@ global.IMTOAuth2Account = class IMTOAuth2Account extends IMTOAuthAccount {
 	initialize(done) {
 		this.options.clientId = this.data.consumerKey || this.common.consumerKey;
 		this.options.clientSecret = this.data.consumerSecret || this.common.consumerSecret;
-		this.options.redirectUri = this.options.redirectUri || `https://${this.environment.host}/oauth/cb/${this.name}/`;
+		this.options.redirectUri = this.options.redirectUri || `https://${this.environment.host}/oauth/cb/${this.name}`;
 
 		this.client = new Client(this.options)
 		done();
