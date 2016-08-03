@@ -210,6 +210,6 @@ global.IMTOAuth2Account = class IMTOAuth2Account extends IMTOAuthAccount {
 	getResponseError(err, response) {
 		if (!err && response.statusCode < 300) return false;
 		if (err instanceof Error) return err
-		return new Error(response.body);
+		return new Error(response.body.error || response.body);
 	}
 }
