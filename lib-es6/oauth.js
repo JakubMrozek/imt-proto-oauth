@@ -14,7 +14,7 @@ const TOKENS = new Map();
 
 IMTOAuthAccount.createToken = function createToken(id, data, done) {
 	if (TOKENS.has(id))
-		setImmediate(() => done(new Error("Token already exists.")));
+		return setImmediate(() => done(new Error("Token already exists.")));
 	
 	TOKENS.set(id, data);
 	
@@ -46,6 +46,25 @@ IMTOAuthAccount.getToken = function getToken(id, done) {
 }
 
 Object.assign(IMTOAuthAccount.prototype, {
+	/**
+	 *
+	 */
+	
+	accountFromCallbackRequest(request, done) {
+		let rt = this.getTokenFromRequest(request);
+		
+		IMTOAuthAccount.getToken(rt, (err, token) => {
+			if (err) return done(err);
+			
+			this.id = token.account;
+			this.acceptedScope = token.scope;
+
+			IMTOAuthAccount.deleteToken(rt);
+
+			done(null);
+		});
+	},
+	
 	/**
 	 *
 	 */

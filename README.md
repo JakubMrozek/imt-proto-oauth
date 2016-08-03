@@ -164,7 +164,7 @@ Method `get` is only wrapper for package [request](https://github.com/request/re
 ##### POST
 
 ```js
-oauth.get(url || options, accessToken, (err, res, body) =>{});
+oauth.post(url || options, accessToken, (err, res, body) =>{});
 ```
 
 Method `post` is only wrapper for package [request](https://github.com/request/request) with default parameters:

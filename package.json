@@ -15,7 +15,7 @@
     "integromat",
     "imt"
   ],
-  "version": "1.0.1",
+  "version": "1.0.3",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
     "node": ">=4.0"
   },
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha test",
+    "post-merge": "npm update"
   }
 }
